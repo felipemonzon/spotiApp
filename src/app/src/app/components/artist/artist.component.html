@@ -1,0 +1,69 @@
+<button class="btn btn-outline btn-secondary mb-3" routerLink="/search">Regresar</button>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-title">
+                <div class="card-img card-img-top">
+                    <div class="panel-header panel-header-lg">
+                        <img class="img-fluid" [src]="artist.images | noimage" alt="... ">
+                    </div>
+                </div>
+                <div class="card-img-overlay">
+                    <h1 class="card-title">{{artist.name}}</h1>
+                    <p class="card-text">
+                        <a class="text-decoration-none" [href]="artist.external_urls.spotify" target="_blank">
+                            Ir a la pagina del artista.
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="card-body" style="z-index: 2;">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-profile-stats d-flex justify-content-center card-text">
+                            <div>
+                                <span class="heading d-block">{{artist.followers.total}}</span>
+                                <i class="fas fa-user"></i>
+                                <span class="description mx-1">Followers</span>
+                            </div>
+                            <div>
+                                <span class="heading d-block">{{artist.popularity}}</span>
+                                <i class="fas fa-circle"></i>
+                                <span class="description mx-1">Popularity</span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <caption>List of tracks</caption>
+                            <thead>
+                                <tr>
+                                    <th class="text-center text-uppercase" scope="col">Nombre</th>
+                                    <th class="text-center text-uppercase" scope="col">album</th>
+                                    <th class="text-center text-uppercase" scope="col">Foto</th>
+                                    <th class="text-center text-uppercase" scope="col">vista previa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let track of topTracks">
+                                    <td class="text-center">{{track.name}}</td>
+                                    <td class="text-center">{{track.album.name}}</td>
+                                    <td>
+                                        <img class="img-thumb" [src]="track.album.images | noimage" alt="">
+                                    </td>
+                                    <td>
+                                        <iframe [src]="track.uri | loadAudio " width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr>
+                <p class="card-text">Genres</p>
+                <span class="badge rounded-pill bg-primary" *ngFor="let genre of artist.genres">{{genre}}</span>
+            </div>
+        </div>
+    </div>
+</div>
